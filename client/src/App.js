@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import 'sass/App.scss';
-
+import './App.css';
 
 function App() {
-  const [passwords, setPasswords] = useState([]);
-  
+  const [passwords, setPasswords] = useState([])
+
   const getPasswords = () => {
     fetch('/api/passwords')
       .then(res => res.json())
@@ -12,23 +11,19 @@ function App() {
   }
 
   useEffect(() => {
-    getPasswords(setPasswords)
+    getPasswords()
   }, [])
 
   return (
     <div className="App">
-      app is here
-      <p>passwords:</p>
       {
         passwords.length > 0 ?
-        passwords.map(pw => <p key={pw}>{pw}</p>)
+          passwords.map(p => <p key={p}>{p}</p>)
         :
         ''
       }
-      <button
-        onClick={getPasswords}
-      >
-        Get more passwords
+      <button onClick={getPasswords}>
+        get more
       </button>
     </div>
   );

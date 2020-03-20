@@ -1,9 +1,6 @@
 {
   "name": "wow-macro-generator",
   "version": "1.0.0",
-  "engines": {
-    "node": "12.16.x"
-  },
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
