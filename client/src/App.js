@@ -5,18 +5,12 @@ import axios from 'axios';
 
 function App() {
   const onLogin = (googleUser) => {
-    console.log(googleUser.profileObj);
-
-    let user = googleUser.profileObj;
+    //console.log(googleUser);
     let id_token = googleUser.getAuthResponse().id_token;
     axios({
       method: 'POST',
-      url: '/api/userLogin',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
+      url: '/users/create',
       data: {
-        userInfo: user,
         idToken: id_token
       }
     })
@@ -35,7 +29,7 @@ function App() {
   return (
     <div className="App">
       <GoogleLogin
-        clientId="836869392315-a1kdsppru2msbr38du59ck61sohlve2l.apps.googleusercontent.com"
+        clientId="836869392315-8rs1dt2a491mgg7qvr8hntbunkfdtgg1.apps.googleusercontent.com"
         buttonText="Login"
         onSuccess={onLogin}
         onFailure={onLoginFail}

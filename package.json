@@ -10,16 +10,14 @@
     "express": "^4.15.3",
     "google-auth-library": "^5.10.1",
     "mongodb": "^3.5.5",
+    "nodemon": "^2.0.2",
     "password-generator": "^2.2.3",
+    "pino-colada": "^1.5.1",
     "react-google-login": "^5.1.2"
   },
   "scripts": {
-    "dev": "nodemon server/index.js || pino-colada",
-    "start": "node server/index.js",
+    "dev": "nodemon server/index.js | pino-colada",
+    "start": "node server/index.js | pino-colada",
     "heroku-postbuild": "cd client && yarn && yarn run build"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.2",
-    "pino-colada": "^1.5.1"
   }
 }
