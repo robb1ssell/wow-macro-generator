@@ -1,8 +1,15 @@
 const express = require('express');
 const path = require('path');
-const generatePassword = require('password-generator');
+const bodyParser = require('body-parser');
+
+const userRoutes = require('./routes/users');
 
 const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use('/users', userRoutes)
 
 require('dotenv').config()
 const DB_USERNAME = process.env.DB_USERNAME;
@@ -12,7 +19,7 @@ console.log(DB_USERNAME, DB_PASSWORD)
 
 const MongoClient = require('mongodb').MongoClient;
 const dbURL = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@wow-macro-generator-jpegy.mongodb.net/test?retryWrites=true&w=majority`
-const client = new MongoClient(dbURL, { useNewUrlParser: true });
+const client = new MongoClient(dbURL, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
   const collection = client.db("test").collection("devices");
   if (err) {
@@ -31,19 +38,6 @@ client.connect(err => {
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Put all API endpoints under '/api'
-app.get('/api/passwords', (req, res) => {
-  const count = 5;
-
-  // Generate some passwords
-  const passwords = Array.from(Array(count).keys()).map(i =>
-    generatePassword(12, false)
-  )
-
-  // Return them as json
-  res.json(passwords);
-
-  console.log(`Sent ${count} passwords`);
-});
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
