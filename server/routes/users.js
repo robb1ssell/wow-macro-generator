@@ -2,6 +2,26 @@ let express = require('express')
 let router = express.Router()
 const {OAuth2Client} = require('google-auth-library');
 const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const DB_USERNAME = process.env.DB_USERNAME;
+const DB_PASSWORD = process.env.DB_PASSWORD;
+const MongoClient = require('mongodb').MongoClient;
+const uri = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@wow-macro-generator-jpegy.mongodb.net/test?retryWrites=true&w=majority`
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+/*
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  if (err) {
+    console.log(err)
+  }
+  else {
+    console.log('Connected to MongoDB Atlas')
+  }
+  // perform actions on the collection object
+  client.close();
+  console.log('Connection closed')
+});
+*/
+
 
 router.get('/', (req, res) => {
   res.send('user router')

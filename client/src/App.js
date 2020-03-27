@@ -4,6 +4,8 @@ import GoogleLogin from 'react-google-login';
 import axios from 'axios';
 
 function App() {
+  const [userInfo, setUserInfo] = useState();
+
   const onLogin = (googleUser) => {
     //console.log(googleUser);
     let id_token = googleUser.getAuthResponse().id_token;
